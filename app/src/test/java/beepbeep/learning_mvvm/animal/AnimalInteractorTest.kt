@@ -2,6 +2,7 @@ package beepbeep.learning_mvvm.animal
 
 import io.reactivex.Observable
 import io.reactivex.observers.TestObserver
+import io.reactivex.subjects.PublishSubject
 import org.junit.Test
 
 
@@ -16,7 +17,14 @@ class AnimalInteractorTest {
                 return Observable.just<String>("ASDF ASDF")
             }
         }
-        interactor = AnimalInteractor(repo)
+        val trigger = PublishSubject.create<Unit>()
+        val input = object : AnimalContract.Input {
+            override fun onCreate(): Observable<Unit> {
+                return trigger
+            }
+        }
+
+        interactor = AnimalInteractor(input, repo)
 
         val testObserver = TestObserver<String>()
 
@@ -24,7 +32,7 @@ class AnimalInteractorTest {
         testObserver.assertValue("")
         testObserver.assertValueCount(1)
 
-        interactor.doStuff()
+        trigger.onNext(Unit)
         testObserver.assertValues("", "ASDF ASDF")
         testObserver.assertValueCount(2)
     }
