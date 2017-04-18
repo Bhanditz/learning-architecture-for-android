@@ -6,4 +6,13 @@ interface AnimalContract {
     interface Input {
         fun onCreate(): Observable<Unit>
     }
+
+    interface Repo {
+        fun getAnimals(): Observable<String>
+    }
+
+    interface Output {
+        val viewModels: Observable<AnimalViewModel>
+    }
+
 }

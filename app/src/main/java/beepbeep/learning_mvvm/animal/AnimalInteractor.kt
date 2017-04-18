@@ -3,7 +3,7 @@ package beepbeep.learning_mvvm.animal
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 
-class AnimalInteractor(input: AnimalContract.Input, val repo: RepoInterface) {
+class AnimalInteractor(input: AnimalContract.Input, val repo: AnimalContract.Repo) : AnimalContract.Output {
 
     private val publisher = BehaviorSubject.createDefault<AnimalViewModel>(AnimalViewModel(""))
 
@@ -13,6 +13,6 @@ class AnimalInteractor(input: AnimalContract.Input, val repo: RepoInterface) {
         }.subscribeWith(publisher)
     }
 
-    val viewModels: Observable<AnimalViewModel> =
+    override val viewModels: Observable<AnimalViewModel> =
             publisher.distinctUntilChanged()
 }

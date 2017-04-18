@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import beepbeep.learning_mvvm.animal.AnimalActivity
+import beepbeep.learning_mvvm.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -75,7 +76,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             // Handle the camera action
             startActivity(Intent(this, AnimalActivity::class.java))
         } else if (id == R.id.nav_gallery) {
-
+            startActivity(Intent(this, LoginActivity::class.java))
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {

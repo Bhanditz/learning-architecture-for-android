@@ -12,7 +12,7 @@ class AnimalInteractorTest {
 
     @Test
     fun doStuff() {
-        val repo: RepoInterface = object : RepoInterface {
+        val repo: AnimalContract.Repo = object : AnimalContract.Repo {
             override fun getAnimals(): Observable<String> {
                 return Observable.just<String>("ASDF ASDF")
             }
