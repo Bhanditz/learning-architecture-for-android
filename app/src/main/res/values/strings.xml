@@ -5,4 +5,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="mvp_vm_activity">MVP-VM Arch Basic</string>
+    <string name="mvp_vm_simple_form_activity_rxJava">MVPVM Arch RxJava: simple form</string>
+    <string name="mvvm_data_binding">MVVM Data Binding</string>
+    <string name="mvvm_rxjava">MVVM RxJava</string>
 </resources>

@@ -6,9 +6,9 @@ import io.reactivex.subjects.PublishSubject
 import org.junit.Test
 
 
-class AnimalInteractorTest {
+class AnimalPresenterTest {
 
-    lateinit var interactor: AnimalInteractor
+    lateinit var interactor: AnimalPresenter
 
     @Test
     fun doStuff() {
@@ -24,7 +24,7 @@ class AnimalInteractorTest {
             }
         }
 
-        interactor = AnimalInteractor(input, repo)
+        interactor = AnimalPresenter(input, repo)
 
         val testObserver = TestObserver<String>()
 

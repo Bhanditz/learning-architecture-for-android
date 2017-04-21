@@ -4,6 +4,6 @@ import io.reactivex.Observable
 
 class AnimalRepo : AnimalContract.Repo {
     override fun getAnimals(): Observable<String> {
-        return Observable.just<String>("(^≗ω≗^)")
+        return Observable.just<String>("(^≗ω≗^)\n miao~♥")
     }
 }

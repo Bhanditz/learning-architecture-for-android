@@ -9,13 +9,13 @@ import kotlinx.android.synthetic.main.activity_animal.*
 
 class AnimalActivity : AppCompatActivity(), AnimalContract.Input {
 
-    lateinit var connector: AnimalInteractor;
+    lateinit var connector: AnimalPresenter;
     val initialTrigger = BehaviorSubject.createDefault<Unit>(Unit);
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_animal)
-        connector = AnimalInteractor(this, AnimalRepo())
+        connector = AnimalPresenter(this, AnimalRepo())
         bindViews()
     }
 
