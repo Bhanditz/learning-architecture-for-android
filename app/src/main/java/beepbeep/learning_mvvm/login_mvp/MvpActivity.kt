@@ -8,7 +8,7 @@ import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : AppCompatActivity() {
+class MvpActivity : AppCompatActivity() {
 
     lateinit var connector: LoginInteractor;
 

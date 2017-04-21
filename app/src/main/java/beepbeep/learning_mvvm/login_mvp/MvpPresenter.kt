@@ -4,7 +4,7 @@ import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
 import io.reactivex.subjects.BehaviorSubject
 
-class LoginInteractor(val input: LoginContract.Input) : LoginContract.Output {
+class MvpPresenter(val input: LoginContract.Input) : LoginContract.Output {
 
     val publisher: BehaviorSubject<LoginViewModel> = BehaviorSubject.createDefault<LoginViewModel>(LoginViewModel("", "", ""))
     override val outputViewModel: Observable<LoginViewModel> =

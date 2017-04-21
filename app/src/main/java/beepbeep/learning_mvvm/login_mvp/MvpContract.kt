@@ -2,7 +2,7 @@ package beepbeep.learning_mvvm.login
 
 import io.reactivex.Observable
 
-interface LoginContract {
+interface MvpContract {
     interface Input {
         val name: Observable<String>
         val favoriteAnimal: Observable<String>
