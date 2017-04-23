@@ -12,7 +12,7 @@ class MvpActivity : AppCompatActivity(), MvpContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_mvp)
+        setContentView(R.layout.activity_shared)
         supportActionBar?.title = getString(R.string.menu_mvp)
         mvpPresenter = MvpPresenter(this)
 

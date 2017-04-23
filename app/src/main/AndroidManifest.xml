@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".mvp.MvpActivity" />
         <activity android:name=".mvpvm.MvpVmActivity" />
-        <activity android:name=".mvpvm.MvvmDataBindingActivity" />
+        <activity android:name=".mvvm_databinding.MvvmDataBindingActivity" />
+        <activity android:name=".mvvm_rxjava.MvvmRxActivity" />
     </application>
 
 </manifest>

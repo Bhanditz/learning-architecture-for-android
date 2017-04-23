@@ -1,18 +1,19 @@
 package beepbeep.learning_mvvm.mvp
 
-class MvpPresenter(val view: MvpContract.View) {
+class MvpPresenter(val view: MvpContract.View) : MvpContract.Presenter {
     var name: String = ""
     var animalName: String = ""
 
-    fun onNameInput(s: CharSequence?) {
+    override fun onNameInput(s: CharSequence?) {
         name = s.toString()
     }
 
-    fun onAnimalNameInput(s: CharSequence?) {
+    override fun onAnimalNameInput(s: CharSequence?) {
         animalName = s.toString()
     }
 
-    fun onSubmitButtonClick() {
+    override fun onSubmitButtonClick() {
         view.onDisplayStringUpdate(name + " likes " + animalName)
     }
+
 }

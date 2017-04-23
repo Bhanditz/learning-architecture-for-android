@@ -7,6 +7,7 @@ import io.reactivex.subjects.BehaviorSubject
 class MvpVmPresenter(val input: MvpVmContract.Input) : MvpVmContract.Output {
 
     val publisher: BehaviorSubject<MvpVmViewModel> = BehaviorSubject.createDefault<MvpVmViewModel>(MvpVmViewModel("", "", ""))
+
     override val outputViewModel: Observable<MvpVmViewModel> =
             input.buttonEvent.map { publisher.value }
 

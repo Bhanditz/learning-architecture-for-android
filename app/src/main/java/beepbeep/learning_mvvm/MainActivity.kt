@@ -11,7 +11,8 @@ import android.view.Menu
 import android.view.MenuItem
 import beepbeep.learning_mvvm.mvp.MvpActivity
 import beepbeep.learning_mvvm.mvpvm.MvpVmActivity
-import beepbeep.learning_mvvm.mvpvm.MvvmDataBindingActivity
+import beepbeep.learning_mvvm.mvvm_databinding.MvvmDataBindingActivity
+import beepbeep.learning_mvvm.mvvm_rxjava.MvvmRxActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -73,7 +74,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else if (id == R.id.nav_mvvm_data_binding) {
             startActivity(Intent(this, MvvmDataBindingActivity::class.java))
         } else if (id == R.id.nav_mvvm_rxjava) {
-//            startActivity(Intent(this, MvpVmActivity::class.java))
+            startActivity(Intent(this, MvvmRxActivity::class.java))
         } else if (id == R.id.nav_mvpvm_rxjava) {
             startActivity(Intent(this, MvpVmActivity::class.java))
         } else if (id == R.id.nav_share) {
