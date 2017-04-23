@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    tools:context="beepbeep.learning_mvvm.mvpvm.MvvmDataBindingActivity">
+    android:padding="16dp">
 
     <EditText
         android:id="@+id/nameEditText"

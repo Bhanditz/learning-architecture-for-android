@@ -1,20 +1,19 @@
-package beepbeep.learning_mvvm.login
+package beepbeep.learning_mvvm.mvpvm
 
 import io.reactivex.observers.TestObserver
 import io.reactivex.subjects.PublishSubject
 import org.junit.Test
 
-class LoginInteractorTest {
+class MvpVmPresenterTest {
 
     @Test
     fun normalFlow() {
-
         // input
         val nameSubject = PublishSubject.create<String>()
         val favoriteAnimalSubject = PublishSubject.create<String>()
         val buttonEventSubject = PublishSubject.create<Unit>()
 
-        val input = object : LoginContract.Input {
+        val input = object : MvpVmContract.Input {
             override val name: PublishSubject<String>
                 get() = nameSubject
             override val favoriteAnimal: PublishSubject<String>
@@ -24,10 +23,10 @@ class LoginInteractorTest {
         }
 
         // setup black box
-        val blackBox = LoginInteractor(input)
+        val blackBox = MvpVmPresenter(input)
 
         // setup tester
-        val testObserver = TestObserver<LoginViewModel>()
+        val testObserver = TestObserver<MvpVmViewModel>()
         blackBox.outputViewModel.subscribe(testObserver)
 
         // case: setup inputName and favorite animal, but not clicking button

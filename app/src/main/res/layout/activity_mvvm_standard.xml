@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="beepbeep.learning_mvvm.mvvm_databinding.ViewModel" />
+            type="beepbeep.learning_mvvm.mvvm_databinding.MvvmViewModel" />
     </data>
 
     <LinearLayout

@@ -2,7 +2,7 @@ package beepbeep.learning_mvvm.mvvm_databinding
 
 import android.databinding.ObservableField
 
-class ViewModel(
+class MvvmViewModel(
         val displayString: ObservableField<String>
 ) {
     var inputName: String = ""
@@ -14,7 +14,7 @@ class ViewModel(
 //    companion object {
 //        @JvmStatic
 //        @BindingAdapter("app:binding")
-//        fun bindEditText(editText: EditText, model: ViewModel) {
+//        fun bindEditText(editText: EditText, model: MvvmViewModel) {
 //            val watcher = object : TextWatcher {
 //                override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
 //

@@ -1,4 +1,4 @@
-package beepbeep.learning_mvvm.login
+package beepbeep.learning_mvvm.mvpvm
 
 import io.reactivex.Observable
 
@@ -10,6 +10,6 @@ interface MvvmContract {
     }
 
     interface Output {
-//        val outputViewModel: Observable<LoginViewModel>
+//        val outputViewModel: Observable<MvpVmViewModel>
     }
 }

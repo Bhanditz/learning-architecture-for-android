@@ -3,21 +3,21 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_mvp"
             android:icon="@drawable/ic_menu_camera"
-            android:title="@string/mvp_vm_activity" />
+            android:title="@string/menu_mvp" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/mvp_vm_simple_form_activity_rxJava" />
-        <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_mvvm_data_binding"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/mvvm_data_binding" />
+            android:title="@string/menu_mvvm_data_binding" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_mvvm_rxjava"
             android:icon="@drawable/ic_menu_manage"
-            android:title="@string/mvvm_rxjava" />
+            android:title="@string/menu_mvvm_rxjava" />
+        <item
+            android:id="@+id/nav_mvpvm_rxjava"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_mvpvm_rxjava" />
     </group>
 
     <item android:title="Communicate">

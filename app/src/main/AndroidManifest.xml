@@ -19,9 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".animal.AnimalActivity" />
-        <activity android:name=".login.LoginActivity" />
-        <activity android:name=".login.MvvmDataBindingActivity" />
+        <activity android:name=".mvp.MvpActivity" />
+        <activity android:name=".mvpvm.MvpVmActivity" />
+        <activity android:name=".mvpvm.MvvmDataBindingActivity" />
     </application>
 
 </manifest>
