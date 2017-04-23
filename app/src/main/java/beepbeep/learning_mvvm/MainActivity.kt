@@ -13,6 +13,7 @@ import beepbeep.learning_mvvm.mvp.MvpActivity
 import beepbeep.learning_mvvm.mvpvm.MvpVmActivity
 import beepbeep.learning_mvvm.mvvm_databinding.MvvmDataBindingActivity
 import beepbeep.learning_mvvm.mvvm_rxjava.MvvmRxActivity
+import beepbeep.learning_mvvm.no_arch.NoArchActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -68,8 +69,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         val id = item.itemId
-
-        if (id == R.id.nav_mvp) {
+        if (id == R.id.nav_share) {
+            startActivity(Intent(this, NoArchActivity::class.java))
+        } else if (id == R.id.nav_mvp) {
             startActivity(Intent(this, MvpActivity::class.java))
         } else if (id == R.id.nav_mvvm_data_binding) {
             startActivity(Intent(this, MvvmDataBindingActivity::class.java))
@@ -77,11 +79,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(Intent(this, MvvmRxActivity::class.java))
         } else if (id == R.id.nav_mvpvm_rxjava) {
             startActivity(Intent(this, MvpVmActivity::class.java))
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
+//        else if (id == R.id.nav_send) {
+//
+//        }
 
         val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
         drawer.closeDrawer(GravityCompat.START)

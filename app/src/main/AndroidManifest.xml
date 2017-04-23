@@ -19,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".no_arch.NoArchActivity" />
         <activity android:name=".mvp.MvpActivity" />
         <activity android:name=".mvpvm.MvpVmActivity" />
         <activity android:name=".mvvm_databinding.MvvmDataBindingActivity" />

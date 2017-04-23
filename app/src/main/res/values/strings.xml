@@ -6,6 +6,7 @@
 
     <string name="action_settings">Settings</string>
 
+    <string name="menu_no_arch">no arch</string>
     <string name="menu_mvp">learning mvp</string>
     <string name="menu_mvvm_data_binding">learning mvvm with data binding</string>
     <string name="menu_mvvm_rxjava">learning mvvm with rxjava</string>
