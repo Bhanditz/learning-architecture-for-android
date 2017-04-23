@@ -11,7 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import beepbeep.learning_mvvm.animal.AnimalActivity
 import beepbeep.learning_mvvm.login.LoginActivity
-import beepbeep.learning_mvvm.login.MvpActivity
+import beepbeep.learning_mvvm.login.MvvmDataBindingActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else if (id == R.id.nav_gallery) {
             startActivity(Intent(this, LoginActivity::class.java))
         } else if (id == R.id.nav_slideshow) {
-            startActivity(Intent(this, MvpActivity::class.java))
+            startActivity(Intent(this, MvvmDataBindingActivity::class.java))
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {

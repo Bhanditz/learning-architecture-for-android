@@ -20,8 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".animal.AnimalActivity" />
-        <activity android:name=".login.LoginActivity"/>
-        <activity android:name=".login.MvpActivity"/>
+        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".login.MvvmDataBindingActivity" />
     </application>
 
 </manifest>

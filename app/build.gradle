@@ -13,6 +13,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    dataBinding {
+        enabled = true
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -31,9 +34,13 @@ dependencies {
     compile "io.reactivex.rxjava2:rxjava:$rxAndroidVersion"
     compile "com.jakewharton.rxbinding2:rxbinding:$rxBindingVersion"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    kapt "com.android.databinding:compiler:$android_plugin_version"
+    //testCompile 'net.wuerl.kotlin:assertj-core-kotlin:0.2.0'
     compile 'com.android.support:appcompat-v7:25.3.0'
     compile 'com.android.support:design:25.3.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
-    //testCompile 'net.wuerl.kotlin:assertj-core-kotlin:0.2.0'
+}
+kapt {
+    generateStubs = true
 }

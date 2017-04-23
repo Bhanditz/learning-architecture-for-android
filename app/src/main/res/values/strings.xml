@@ -10,4 +10,5 @@
     <string name="mvp_vm_simple_form_activity_rxJava">MVPVM Arch RxJava: simple form</string>
     <string name="mvvm_data_binding">MVVM Data Binding</string>
     <string name="mvvm_rxjava">MVVM RxJava</string>
+    <string name="title_activity_java">JavaActivity</string>
 </resources>

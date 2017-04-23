@@ -30,7 +30,7 @@ class LoginInteractorTest {
         val testObserver = TestObserver<LoginViewModel>()
         blackBox.outputViewModel.subscribe(testObserver)
 
-        // case: setup name and favorite animal, but not clicking button
+        // case: setup inputName and favorite animal, but not clicking button
         nameSubject.onNext("JR")
         favoriteAnimalSubject.onNext("cat")
 
