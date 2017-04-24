@@ -4,8 +4,6 @@ import beepbeep.learning_mvvm.mvpvm.MvvmRxContract
 import io.reactivex.subjects.BehaviorSubject
 
 class MvvmRxViewModel : MvvmRxContract.Input {
-    //    var namePublisher = BehaviorSubject.createDefault<String>("")
-//    var animalNamePublisher = BehaviorSubject.createDefault<String>("")
     var name: String = ""
     var animalName: String = ""
 

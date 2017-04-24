@@ -14,7 +14,7 @@ class MvpVmPresenter(val input: MvpVmContract.Input) : MvpVmContract.Output {
     init {
         Observable.combineLatest(input.name, input.favoriteAnimal,
                 BiFunction<String, String, MvpVmViewModel> {
-                    name, favoriteAnimal ->
+                    name:String, favoriteAnimal:String ->
                     MvpVmViewModel(name, favoriteAnimal, name + " likes " + favoriteAnimal)
                 }
         ).subscribe(publisher)
