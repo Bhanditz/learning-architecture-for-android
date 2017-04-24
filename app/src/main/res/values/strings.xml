@@ -5,6 +5,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="action_add">Add</string>
 
     <string name="menu_no_arch">no arch</string>
     <string name="menu_mvp">learning mvp</string>
@@ -13,4 +14,7 @@
     <string name="menu_mvpvm_rxjava">learning mvp-vm with rxjava</string>
     <string name="menu_mvp_rx_java">learning mvp with rxjava</string>
 
+    <string name="menu_todo_mvpvm">learning todo mvp-vm</string>
+    <string name="no_tasks_all">You have no TO-DOs!</string>
+    <string name="no_tasks_add">Add a TO-DO item +</string>
 </resources>

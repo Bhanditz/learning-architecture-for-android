@@ -26,6 +26,11 @@
             android:id="@+id/nav_mvp_rxjava"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/menu_mvp_rx_java" />
+        <item
+            android:id="@+id/nav_todo_mvpvm"
+            android:icon="@drawable/ic_menu_share"
+            android:title="@string/menu_todo_mvpvm" />
+
     </group>
 
     <!--<item android:title="Communicate">-->

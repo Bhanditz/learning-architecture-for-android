@@ -15,6 +15,7 @@ import beepbeep.learning_mvvm.mvpvm.MvpVmActivity
 import beepbeep.learning_mvvm.mvvm_databinding.MvvmDataBindingActivity
 import beepbeep.learning_mvvm.mvvm_rxjava.MvvmRxActivity
 import beepbeep.learning_mvvm.no_arch.NoArchActivity
+import beepbeep.learning_mvvm.todo_mvpvm.TodoMvpVmActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -82,6 +83,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(Intent(this, MvpVmActivity::class.java))
         } else if (id == R.id.nav_mvp_rxjava) {
             startActivity(Intent(this, MvpRxActivity::class.java))
+        } else if (id == R.id.nav_todo_mvpvm) {
+            startActivity(Intent(this, TodoMvpVmActivity::class.java))
         }
 //        else if (id == R.id.nav_send) {
 //
