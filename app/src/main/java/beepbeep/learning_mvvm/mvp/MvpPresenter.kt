@@ -6,14 +6,15 @@ class MvpPresenter(val view: MvpContract.View) : MvpContract.Presenter {
 
     override fun onNameInput(s: CharSequence?) {
         name = s.toString()
+        displayStringUpdate()
     }
 
     override fun onAnimalNameInput(s: CharSequence?) {
         animalName = s.toString()
+        displayStringUpdate()
     }
 
-    override fun onSubmitButtonClick() {
+    fun displayStringUpdate() {
         view.onDisplayStringUpdate(name + " likes " + animalName)
     }
-
 }

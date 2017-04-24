@@ -23,10 +23,6 @@ class MvpActivity : AppCompatActivity(), MvpContract.View {
         favoriteAnimalEditText.addTextChangedListener(TextWatcherImp { s, _, _, _ ->
             mvpPresenter.onAnimalNameInput(s)
         })
-
-        submitButton.setOnClickListener {
-            mvpPresenter.onSubmitButtonClick()
-        }
     }
 
     override fun onDisplayStringUpdate(displayString: String) {

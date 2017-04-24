@@ -11,13 +11,17 @@ class MvvmRxViewModel : MvvmRxContract.Input {
 
     override fun onNameInput(s: CharSequence?) {
         name = s.toString()
+        updateDisplayString()
     }
 
     override fun onAnimalNameInput(s: CharSequence?) {
         animalName = s.toString()
+        updateDisplayString()
     }
 
-    override fun onSubmitButtonClick() {
-        outputPublisher.onNext(name + " likes " + animalName)
+    fun updateDisplayString() {
+        if (name.equals("") && animalName.equals("")) {
+            outputPublisher.onNext(name + " likes " + animalName)
+        }
     }
 }

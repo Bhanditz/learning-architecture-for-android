@@ -19,14 +19,17 @@ class NoArchActivity : AppCompatActivity() {
 
         nameEditText.addTextChangedListener(TextWatcherImp { s, _, _, _ ->
             name = s.toString()
+            updateDisplayString()
         })
 
         favoriteAnimalEditText.addTextChangedListener(TextWatcherImp { s, _, _, _ ->
             animalName = s.toString()
+            updateDisplayString()
         })
 
-        submitButton.setOnClickListener {
-            displayTextView.text = name + " likes " + animalName
-        }
+    }
+
+    fun updateDisplayString() {
+        displayTextView.text = name + " likes " + animalName
     }
 }

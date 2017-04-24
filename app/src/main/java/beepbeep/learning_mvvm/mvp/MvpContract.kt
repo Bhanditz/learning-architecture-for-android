@@ -4,7 +4,6 @@ class MvpContract {
     interface Presenter {
         fun onNameInput(s: CharSequence?)
         fun onAnimalNameInput(s: CharSequence?)
-        fun onSubmitButtonClick()
     }
 
     interface View {

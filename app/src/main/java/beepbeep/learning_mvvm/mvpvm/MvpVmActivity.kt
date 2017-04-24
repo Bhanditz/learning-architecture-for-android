@@ -3,7 +3,6 @@ package beepbeep.learning_mvvm.mvpvm
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import beepbeep.learning_mvvm.R
-import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -24,8 +23,6 @@ class MvpVmActivity : AppCompatActivity() {
                 get() = RxTextView.textChanges(nameEditText).map { it.toString() }
             override val favoriteAnimal: Observable<String>
                 get() = RxTextView.textChanges(favoriteAnimalEditText).map { it.toString() }
-            override val buttonEvent: Observable<Unit>
-                get() = RxView.clicks(submitButton).map { Unit }
         })
 
         disposables.add(connector.outputViewModel.subscribe {

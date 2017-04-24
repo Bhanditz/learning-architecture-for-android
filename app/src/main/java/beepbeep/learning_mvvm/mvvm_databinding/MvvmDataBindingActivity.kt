@@ -26,10 +26,6 @@ class MvvmDataBindingActivity : AppCompatActivity() {
         binding.favoriteAnimalEditText.addTextChangedListener(TextWatcherImp { s, _, _, _ ->
             binding.model.onAnimalNameInput(s.toString())
         })
-
-        binding.submitButton.setOnClickListener { v ->
-            binding.model.onSubmitButtonClick()
-        }
     }
 
 }

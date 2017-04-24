@@ -32,14 +32,6 @@
             android:textColor="@color/colorPrimaryDark"
             android:textColorHint="@color/colorPrimary" />
 
-        <Button
-            android:id="@+id/submitButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:text="Submit"
-            android:textColor="#FFFFFF" />
-
         <TextView
             android:id="@+id/displayTextView"
             android:layout_width="wrap_content"

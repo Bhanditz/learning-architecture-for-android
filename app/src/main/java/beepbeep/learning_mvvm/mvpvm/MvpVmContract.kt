@@ -6,7 +6,6 @@ interface MvpVmContract {
     interface Input {
         val name: Observable<String>
         val favoriteAnimal: Observable<String>
-        val buttonEvent: Observable<Unit>
     }
 
     interface Output {
