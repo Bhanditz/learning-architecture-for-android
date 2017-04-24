@@ -16,11 +16,11 @@ class MvpActivity : AppCompatActivity(), MvpContract.View {
         supportActionBar?.title = getString(R.string.menu_mvp)
         mvpPresenter = MvpPresenter(this)
 
-        nameEditText.addTextChangedListener(TextWatcherImp { s, _, _, _ ->
+        nameEditText.addTextChangedListener(TextWatcherImp { s, start, before, count ->
             mvpPresenter.onNameInput(s)
         })
 
-        favoriteAnimalEditText.addTextChangedListener(TextWatcherImp { s, _, _, _ ->
+        favoriteAnimalEditText.addTextChangedListener(TextWatcherImp { s, start, before, count ->
             mvpPresenter.onAnimalNameInput(s)
         })
     }

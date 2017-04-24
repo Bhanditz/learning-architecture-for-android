@@ -19,11 +19,11 @@ class MvvmDataBindingActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView<ActivityMvvmDataBindingBinding>(this, R.layout.activity_mvvm_data_binding)
         binding.model = MvvmViewModel(ObservableField(""))
 
-        binding.nameEditText.addTextChangedListener(TextWatcherImp { s, _, _, _ ->
+        binding.nameEditText.addTextChangedListener(TextWatcherImp { s, start, before, count ->
             binding.model.onNameInput(s.toString())
         })
 
-        binding.favoriteAnimalEditText.addTextChangedListener(TextWatcherImp { s, _, _, _ ->
+        binding.favoriteAnimalEditText.addTextChangedListener(TextWatcherImp { s, start, before, count ->
             binding.model.onAnimalNameInput(s.toString())
         })
     }

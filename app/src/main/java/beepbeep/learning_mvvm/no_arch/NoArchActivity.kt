@@ -17,12 +17,12 @@ class NoArchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_shared)
         supportActionBar?.title = getString(R.string.menu_no_arch)
 
-        nameEditText.addTextChangedListener(TextWatcherImp { s, _, _, _ ->
+        nameEditText.addTextChangedListener(TextWatcherImp { s, start, before, count ->
             name = s.toString()
             updateDisplayString()
         })
 
-        favoriteAnimalEditText.addTextChangedListener(TextWatcherImp { s, _, _, _ ->
+        favoriteAnimalEditText.addTextChangedListener(TextWatcherImp { s, start, before, count ->
             animalName = s.toString()
             updateDisplayString()
         })

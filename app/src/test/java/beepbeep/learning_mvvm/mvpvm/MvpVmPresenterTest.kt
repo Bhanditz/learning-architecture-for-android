@@ -7,19 +7,16 @@ import org.junit.Test
 class MvpVmPresenterTest {
 
     @Test
-    fun normalFlow() {
+    fun displayCorrectly() {
         // input
         val nameSubject = PublishSubject.create<String>()
         val favoriteAnimalSubject = PublishSubject.create<String>()
-        val buttonEventSubject = PublishSubject.create<Unit>()
 
         val input = object : MvpVmContract.Input {
             override val name: PublishSubject<String>
                 get() = nameSubject
             override val favoriteAnimal: PublishSubject<String>
                 get() = favoriteAnimalSubject
-            override val buttonEvent: PublishSubject<Unit>
-                get() = buttonEventSubject
         }
 
         // setup black box
@@ -33,21 +30,17 @@ class MvpVmPresenterTest {
         nameSubject.onNext("JR")
         favoriteAnimalSubject.onNext("cat")
 
-        buttonEventSubject.onNext(Unit)
-        testObserver.assertValue {
+        testObserver.assertValueAt(1) {
             it.displayString.equals("JR likes cat")
         }
 
         nameSubject.onNext("Mr. Yama")
-        favoriteAnimalSubject.onNext("corgi")
-
-        //value remains the same because button still not pressed
-        testObserver.assertValue {
-            it.displayString.equals("JR likes cat")
+        testObserver.assertValueAt(2) {
+            it.displayString.equals("Mr. Yama likes cat")
         }
 
-        buttonEventSubject.onNext(Unit)
-        testObserver.assertValueAt(1) {
+        favoriteAnimalSubject.onNext("corgi")
+        testObserver.assertValueAt(3) {
             it.displayString.equals("Mr. Yama likes corgi")
         }
     }
