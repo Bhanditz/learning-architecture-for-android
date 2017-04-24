@@ -20,7 +20,7 @@ class MvvmRxViewModel : MvvmRxContract.Input {
     }
 
     fun updateDisplayString() {
-        if (name.equals("") && animalName.equals("")) {
+        if (!name.equals("") && !animalName.equals("")) {
             outputPublisher.onNext(name + " likes " + animalName)
         }
     }
