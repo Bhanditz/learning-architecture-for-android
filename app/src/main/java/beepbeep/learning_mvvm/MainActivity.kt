@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import beepbeep.learning_mvvm.mpv_rx_java.MvpRxActivity
 import beepbeep.learning_mvvm.mvp.MvpActivity
 import beepbeep.learning_mvvm.mvpvm.MvpVmActivity
 import beepbeep.learning_mvvm.mvvm_databinding.MvvmDataBindingActivity
@@ -79,6 +80,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(Intent(this, MvvmRxActivity::class.java))
         } else if (id == R.id.nav_mvpvm_rxjava) {
             startActivity(Intent(this, MvpVmActivity::class.java))
+        } else if (id == R.id.nav_mvp_rxjava) {
+            startActivity(Intent(this, MvpRxActivity::class.java))
         }
 //        else if (id == R.id.nav_send) {
 //
