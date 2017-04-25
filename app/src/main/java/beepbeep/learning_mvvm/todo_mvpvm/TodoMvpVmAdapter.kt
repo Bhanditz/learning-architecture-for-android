@@ -12,18 +12,28 @@ import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.list_item_todo.view.listTasksComplete
 import kotlinx.android.synthetic.main.list_item_todo.view.listTasksTitle
 
-typealias TodoItemClickHandler = (Int) -> Unit
-typealias TodoCheckToggleHandler = (Int) -> Unit
+typealias TodoActionOnIndexHandler = (Int) -> Unit
 
-class TodoMvpVmViewHolder(view: View, val itemClickHandler: TodoItemClickHandler, val todoCheckToggleHandler: TodoCheckToggleHandler) : RecyclerView.ViewHolder(view) {
+class TodoMvpVmViewHolder(view: View,
+                          val itemClickHandler: TodoActionOnIndexHandler,
+                          val todoCheckToggleHandler: TodoActionOnIndexHandler,
+                          val itemLongClickHandler: TodoActionOnIndexHandler) : RecyclerView.ViewHolder(view) {
     init {
         view.setOnClickListener {
             itemClickHandler.invoke(adapterPosition)
         }
+        view.setOnLongClickListener {
+            itemLongClickHandler.invoke(adapterPosition)
+            true
+        }
     }
 }
 
-class TodoMvpVmAdapter(items: Observable<List<TodoMvpVmListViewModel>>, val itemClickHandler: TodoItemClickHandler, val todoCheckToggleHandler: TodoCheckToggleHandler) : RecyclerView.Adapter<TodoMvpVmViewHolder>() {
+class TodoMvpVmAdapter(items: Observable<List<TodoMvpVmListViewModel>>,
+                       val itemClickHandler: TodoActionOnIndexHandler,
+                       val todoCheckToggleHandler: TodoActionOnIndexHandler,
+                       val itemLongClickHandler: TodoActionOnIndexHandler) : RecyclerView.Adapter<TodoMvpVmViewHolder>() {
+
     private var itemsSubject = BehaviorSubject.create<List<TodoMvpVmListViewModel>>()
 
     private val compositeDisposable = CompositeDisposable()
@@ -37,7 +47,7 @@ class TodoMvpVmAdapter(items: Observable<List<TodoMvpVmListViewModel>>, val item
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoMvpVmViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_todo, parent, false)
-        return TodoMvpVmViewHolder(view, itemClickHandler, todoCheckToggleHandler)
+        return TodoMvpVmViewHolder(view, itemClickHandler, todoCheckToggleHandler, itemLongClickHandler)
     }
 
     override fun onBindViewHolder(holder: TodoMvpVmViewHolder, position: Int) {

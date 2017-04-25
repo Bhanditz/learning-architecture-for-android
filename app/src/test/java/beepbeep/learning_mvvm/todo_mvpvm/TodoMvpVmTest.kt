@@ -5,12 +5,13 @@ import io.reactivex.observers.TestObserver
 import io.reactivex.subjects.PublishSubject
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.CoreMatchers.hasItem
+import org.hamcrest.CoreMatchers.not
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 
 class TodoMvpVmTest {
     @Test
-    fun `when user initially see the screen, user see preloaded todos`() {
+    fun `when initially see the screen, user sees preloaded todos`() {
         val test = TestObserver<List<TodoMvpVmListViewModel>>()
 
         val repo = object : TodoMvpVmRepositoryType {
@@ -22,6 +23,7 @@ class TodoMvpVmTest {
         val view = object : TodoMvpVmContract.Input {
             override val addTodos: Observable<String> = Observable.empty()
             override val toggleTodoAtIndexes: Observable<Int> = Observable.empty()
+            override val deleteTodoAtIndexes: Observable<Int> = Observable.empty()
         }
 
         val presenter = TodoMvpVmPresenter(view, repo)
@@ -34,7 +36,7 @@ class TodoMvpVmTest {
     }
 
     @Test
-    fun `when user add new todo, user must see new task at the end of the list`() {
+    fun `when add new todo, user sees new task added at the end of the list`() {
         val test = TestObserver<List<TodoMvpVmListViewModel>>()
 
         val repo = object : TodoMvpVmRepositoryType {
@@ -47,6 +49,7 @@ class TodoMvpVmTest {
         val view = object : TodoMvpVmContract.Input {
             override val addTodos: Observable<String> = addTodoSubject
             override val toggleTodoAtIndexes: Observable<Int> = Observable.empty()
+            override val deleteTodoAtIndexes: Observable<Int> = Observable.empty()
         }
 
         val presenter = TodoMvpVmPresenter(view, repo)
@@ -63,7 +66,7 @@ class TodoMvpVmTest {
     }
 
     @Test
-    fun `when there is no todos, user must see emptyView instead of list`() {
+    fun `when there is no todos, user sees emptyView instead of list`() {
         val test = TestObserver<Boolean>()
 
         val repo = object : TodoMvpVmRepositoryType {
@@ -76,6 +79,7 @@ class TodoMvpVmTest {
         val view = object : TodoMvpVmContract.Input {
             override val addTodos: Observable<String> = addTodoSubject
             override val toggleTodoAtIndexes: Observable<Int> = Observable.empty()
+            override val deleteTodoAtIndexes: Observable<Int> = Observable.empty()
         }
 
         val presenter = TodoMvpVmPresenter(view, repo)
@@ -93,7 +97,7 @@ class TodoMvpVmTest {
     }
 
     @Test
-    fun `when toggle a todo, user must see it as an opposite state`() {
+    fun `when toggle a todo, user sees it as an opposite state`() {
         val test = TestObserver<List<TodoMvpVmListViewModel>>()
 
         val repo = object : TodoMvpVmRepositoryType {
@@ -106,6 +110,7 @@ class TodoMvpVmTest {
         val view = object : TodoMvpVmContract.Input {
             override val addTodos: Observable<String> = Observable.empty()
             override val toggleTodoAtIndexes: Observable<Int> = toggleSubject
+            override val deleteTodoAtIndexes: Observable<Int> = Observable.empty()
         }
 
         val presenter = TodoMvpVmPresenter(view, repo)
@@ -129,5 +134,39 @@ class TodoMvpVmTest {
         assertThat(oldItems2[toggledIndex].completed, equalTo(false))
         assertThat(newItems2[toggledIndex].completed, equalTo(true))
         assertThat(newItems2[toggledIndex].title, equalTo("222"))
+    }
+
+    @Test
+    fun `when delete a todo, user sees it being deleted from the list`() {
+        val test = TestObserver<List<TodoMvpVmListViewModel>>()
+
+        val repo = object : TodoMvpVmRepositoryType {
+            override fun loadInitialTodo(): Observable<List<TodoMvpVmListViewModel>> {
+                return Observable.just(listOf(TodoMvpVmListViewModel(true, "111"), TodoMvpVmListViewModel(false, "222")))
+            }
+        }
+
+        val deleteSubject = PublishSubject.create<Int>()
+        val view = object : TodoMvpVmContract.Input {
+            override val addTodos: Observable<String> = Observable.empty()
+            override val toggleTodoAtIndexes: Observable<Int> = Observable.empty()
+            override val deleteTodoAtIndexes: Observable<Int> = deleteSubject
+        }
+
+        val presenter = TodoMvpVmPresenter(view, repo)
+
+        presenter.items.subscribeWith(test)
+
+        val items = test.values()
+
+        deleteSubject.onNext(1)
+        val itemAfterDeleted1 = items[2]
+        assertThat(itemAfterDeleted1, not(hasItem(TodoMvpVmListViewModel(false, "222"))))
+        assertThat(itemAfterDeleted1.size, equalTo(1))
+
+        deleteSubject.onNext(0)
+        val itemAfterDeleted2 = items[3]
+        assertThat(itemAfterDeleted2, not(hasItem(TodoMvpVmListViewModel(true, "111"))))
+        assertThat(itemAfterDeleted2.size, equalTo(0))
     }
 }

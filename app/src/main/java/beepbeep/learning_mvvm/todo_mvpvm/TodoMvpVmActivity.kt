@@ -22,15 +22,19 @@ class TodoMvpVmActivity : AppCompatActivity(), TodoMvpVmContract.Input {
 
     override val addTodos: Observable<String> by lazy { addTodoSubject }
     override val toggleTodoAtIndexes: Observable<Int> by lazy { toggleTodoAtIndexSubject }
+    override val deleteTodoAtIndexes: Observable<Int> by lazy { deleteTodoAtIndexSubject }
 
-    private var addTodoSubject = PublishSubject.create<String>()
-    private var toggleTodoAtIndexSubject = PublishSubject.create<Int>()
+    private val addTodoSubject = PublishSubject.create<String>()
+    private val toggleTodoAtIndexSubject = PublishSubject.create<Int>()
+    private val deleteTodoAtIndexSubject = PublishSubject.create<Int>()
 
     private val adapter: TodoMvpVmAdapter by lazy {
         TodoMvpVmAdapter(presenter.items, {
             toggleTodoAtIndexSubject.onNext(it)
         }, {
             toggleTodoAtIndexSubject.onNext(it)
+        }, {
+            deleteTodoAtIndexSubject.onNext(it)
         })
     }
 
