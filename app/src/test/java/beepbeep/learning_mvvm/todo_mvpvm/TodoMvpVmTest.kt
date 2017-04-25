@@ -10,7 +10,7 @@ import org.junit.Test
 
 class TodoMvpVmTest {
     @Test
-    fun `when user initially load the screen, user see preloaded tasks`() {
+    fun `when user initially see the screen, user see preloaded todos`() {
         val test = TestObserver<TodoMvpVmViewModel>()
 
         val repo = object : TodoMvpVmRepositoryType {
@@ -34,7 +34,7 @@ class TodoMvpVmTest {
     }
 
     @Test
-    fun `when user add new to do, user must see new task at the end of the list`() {
+    fun `when user add new todo, user must see new task at the end of the list`() {
         val test = TestObserver<TodoMvpVmViewModel>()
 
         val repo = object : TodoMvpVmRepositoryType {
@@ -60,4 +60,34 @@ class TodoMvpVmTest {
         assertThat(oldSize, equalTo(0))
         assertThat(newSize, equalTo(1))
     }
+
+    @Test
+    fun `when there is no todos, user must see emptyView instead of list`() {
+        val test = TestObserver<Boolean>()
+
+        val repo = object : TodoMvpVmRepositoryType {
+            override fun loadInitialTodo(): Observable<List<TodoMvpVmListViewModel>> {
+                return Observable.empty()
+            }
+        }
+
+        val addTodoSubject = PublishSubject.create<String>()
+        val view = object : TodoMvpVmContract.Input {
+            override val addTodos: Observable<String> = addTodoSubject
+        }
+
+        val presenter = TodoMvpVmPresenter(view, repo)
+
+        presenter.showEmptyViews.subscribeWith(test)
+
+        addTodoSubject.onNext("New TITLE 2")
+
+        val items = test.values()
+
+        val oldShowEmptyView = items[0]
+        val newShowEmptyView = items[1]
+        assertThat(oldShowEmptyView, equalTo(true))
+        assertThat(newShowEmptyView, equalTo(false))
+    }
+
 }

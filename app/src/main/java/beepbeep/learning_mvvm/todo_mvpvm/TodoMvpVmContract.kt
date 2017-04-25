@@ -8,10 +8,10 @@ interface TodoMvpVmContract {
     }
 
     interface Output {
-        //viewModels
         val viewModels: Observable<TodoMvpVmViewModel>
 
-        //items
         val items: Observable<List<TodoMvpVmListViewModel>>
+
+        val showEmptyViews: Observable<Boolean>
     }
 }
