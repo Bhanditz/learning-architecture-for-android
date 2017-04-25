@@ -31,17 +31,17 @@ class MvpVmPresenterTest {
         favoriteAnimalSubject.onNext("cat")
 
         testObserver.assertValueAt(1) {
-            it.displayString.equals("JR likes cat")
+            it.displayString == "JR likes cat"
         }
 
         nameSubject.onNext("Mr. Yama")
         testObserver.assertValueAt(2) {
-            it.displayString.equals("Mr. Yama likes cat")
+            it.displayString == "Mr. Yama likes cat"
         }
 
         favoriteAnimalSubject.onNext("corgi")
         testObserver.assertValueAt(3) {
-            it.displayString.equals("Mr. Yama likes corgi")
+            it.displayString == "Mr. Yama likes corgi"
         }
     }
 }
