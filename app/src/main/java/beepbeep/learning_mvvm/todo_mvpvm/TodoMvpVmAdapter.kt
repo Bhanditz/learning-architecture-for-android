@@ -13,8 +13,9 @@ import kotlinx.android.synthetic.main.list_item_todo.view.listTasksComplete
 import kotlinx.android.synthetic.main.list_item_todo.view.listTasksTitle
 
 typealias TodoItemClickHandler = (Int) -> Unit
+typealias TodoCheckToggleHandler = (Int) -> Unit
 
-class TodoMvpVmViewHolder(view: View, val itemClickHandler: TodoItemClickHandler) : RecyclerView.ViewHolder(view) {
+class TodoMvpVmViewHolder(view: View, val itemClickHandler: TodoItemClickHandler, val todoCheckToggleHandler: TodoCheckToggleHandler) : RecyclerView.ViewHolder(view) {
     init {
         view.setOnClickListener {
             itemClickHandler.invoke(adapterPosition)
@@ -22,8 +23,7 @@ class TodoMvpVmViewHolder(view: View, val itemClickHandler: TodoItemClickHandler
     }
 }
 
-class TodoMvpVmAdapter(items: Observable<List<TodoMvpVmListViewModel>>, val itemClickHandler: TodoItemClickHandler) : RecyclerView.Adapter<TodoMvpVmViewHolder>() {
-
+class TodoMvpVmAdapter(items: Observable<List<TodoMvpVmListViewModel>>, val itemClickHandler: TodoItemClickHandler, val todoCheckToggleHandler: TodoCheckToggleHandler) : RecyclerView.Adapter<TodoMvpVmViewHolder>() {
     private var itemsSubject = BehaviorSubject.create<List<TodoMvpVmListViewModel>>()
 
     private val compositeDisposable = CompositeDisposable()
@@ -37,7 +37,7 @@ class TodoMvpVmAdapter(items: Observable<List<TodoMvpVmListViewModel>>, val item
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoMvpVmViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_todo, parent, false)
-        return TodoMvpVmViewHolder(view, itemClickHandler)
+        return TodoMvpVmViewHolder(view, itemClickHandler, todoCheckToggleHandler)
     }
 
     override fun onBindViewHolder(holder: TodoMvpVmViewHolder, position: Int) {
@@ -45,9 +45,13 @@ class TodoMvpVmAdapter(items: Observable<List<TodoMvpVmListViewModel>>, val item
             holder.itemView.listTasksComplete.isChecked = completed
             holder.itemView.listTasksTitle.text = title
             val paintFlags = holder.itemView.listTasksTitle.paintFlags
-            holder.itemView.listTasksTitle.paintFlags = paintFlags or if (completed) Paint.STRIKE_THRU_TEXT_FLAG else 0
+            holder.itemView.listTasksTitle.paintFlags = if (completed) paintFlags or Paint.STRIKE_THRU_TEXT_FLAG else paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
         }
     }
 
     override fun getItemCount() = itemsSubject.value.size
+
+    fun dispose() {
+        compositeDisposable.dispose()
+    }
 }

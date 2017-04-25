@@ -12,8 +12,9 @@ class TodoMvpVmPresenter(view: TodoMvpVmContract.Input, repository: TodoMvpVmRep
     init {
         val initialCommands = repository.loadInitialTodo().map { SetTodo(it) }
         val addCommands = view.addTodos.map { AddTodo(it) }
+        val toggleAtIndexCommands = view.toggleTodoAtIndexes.map { ToggleTodo(it) }
 
-        viewModels = Observable.mergeArray(initialCommands, addCommands)
+        viewModels = Observable.mergeArray(initialCommands, addCommands, toggleAtIndexCommands)
                 .scan(TodoMvpVmViewModel()) { vm, command ->
                     vm.executeCommand(command)
                 }
