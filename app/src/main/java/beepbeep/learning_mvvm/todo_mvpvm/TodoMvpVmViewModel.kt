@@ -10,6 +10,7 @@ sealed class TodoMvpVmViewModelCommand
 
 class SetTodo(val items: List<TodoMvpVmListViewModel>) : TodoMvpVmViewModelCommand()
 class AddTodo(val title: String) : TodoMvpVmViewModelCommand()
+class ToggleTodo(val index: Int) : TodoMvpVmViewModelCommand()
 
 data class TodoMvpVmViewModel(val filter: TodoMvpVmFilterType = TodoMvpVmFilterType.ALL_TASKS, val items: List<TodoMvpVmListViewModel> = listOf()) {
     fun executeCommand(command: TodoMvpVmViewModelCommand): TodoMvpVmViewModel {
@@ -21,6 +22,13 @@ data class TodoMvpVmViewModel(val filter: TodoMvpVmFilterType = TodoMvpVmFilterT
                 val newTitle = command.title
                 val _items = items.toMutableList().apply {
                     add(TodoMvpVmListViewModel(false, newTitle))
+                }
+                return TodoMvpVmViewModel(filter, _items)
+            }
+            is ToggleTodo -> {
+                val _items = items.toMutableList().apply {
+                    val selectedItem = this[command.index]
+                    this[command.index] = TodoMvpVmListViewModel(!selectedItem.completed, selectedItem.title)
                 }
                 return TodoMvpVmViewModel(filter, _items)
             }

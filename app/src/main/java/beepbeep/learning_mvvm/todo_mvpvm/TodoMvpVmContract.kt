@@ -5,6 +5,7 @@ import io.reactivex.Observable
 interface TodoMvpVmContract {
     interface Input {
         val addTodos: Observable<String>
+        val toggleTodoAtIndexes: Observable<Int>
     }
 
     interface Output {

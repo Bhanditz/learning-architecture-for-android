@@ -3,7 +3,6 @@ package beepbeep.learning_mvvm.todo_mvpvm
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.Menu
 import android.view.View
 import beepbeep.learning_mvvm.R
@@ -17,11 +16,21 @@ import kotlinx.android.synthetic.main.activity_todo.tasksList
 
 class TodoMvpVmActivity : AppCompatActivity(), TodoMvpVmContract.Input {
 
-    override val addTodos: Observable<String> by lazy { addTodoSubject }
-
     private val presenter: TodoMvpVmContract.Output by lazy { TodoMvpVmPresenter(this) }
 
+    override val addTodos: Observable<String> by lazy { addTodoSubject }
+    override val toggleTodoAtIndexes: Observable<Int> by lazy { toggleTodoAtIndexSubject }
+
     private var addTodoSubject = PublishSubject.create<String>()
+    private var toggleTodoAtIndexSubject = PublishSubject.create<Int>()
+
+    private val adapter: TodoMvpVmAdapter by lazy {
+        TodoMvpVmAdapter(presenter.items, {
+            toggleTodoAtIndexSubject.onNext(it)
+        }, {
+            toggleTodoAtIndexSubject.onNext(it)
+        })
+    }
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -37,10 +46,7 @@ class TodoMvpVmActivity : AppCompatActivity(), TodoMvpVmContract.Input {
 
         tasksList.layoutManager = LinearLayoutManager(this)
 
-        tasksList.adapter = TodoMvpVmAdapter(presenter.items) {
-            Log.d("Click", it.toString())
-        }
-
+        tasksList.adapter = adapter
         compositeDisposable.add(presenter.showEmptyViews.map { !it }.subscribe(RxView.visibility(tasksList)))
         compositeDisposable.add(presenter.showEmptyViews.subscribe(RxView.visibility(tasksEmptyLayout, View.GONE)))
     }
@@ -56,5 +62,6 @@ class TodoMvpVmActivity : AppCompatActivity(), TodoMvpVmContract.Input {
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.dispose()
+        adapter.dispose()
     }
 }
