@@ -2,10 +2,12 @@ package beepbeep.learning_mvvm.todo_mvpvm
 
 import io.reactivex.Observable
 
-class TodoMvpVmPresenter(view: TodoMvpVmContract.Input, repository: TodoMvpVmRepositoryType) : TodoMvpVmContract.Output {
+class TodoMvpVmPresenter(view: TodoMvpVmContract.Input, repository: TodoMvpVmRepositoryType = TodoMvpVmRepository()) : TodoMvpVmContract.Output {
     lateinit override var viewModels: Observable<TodoMvpVmViewModel>
 
     override val items: Observable<List<TodoMvpVmListViewModel>> by lazy { viewModels.map { it.items } }
+
+    override val showEmptyViews: Observable<Boolean> by lazy { viewModels.map { it.items.isEmpty() } }
 
     init {
         val initialCommands = repository.loadInitialTodo().map { SetTodo(it) }
