@@ -6,9 +6,10 @@ import android.view.Menu
 import beepbeep.learning_mvvm.R
 
 class TodoMvpVmActivity : AppCompatActivity(), TodoMvpVmContract.Input {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_todo_mvpvm)
+        setContentView(R.layout.activity_todo)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
