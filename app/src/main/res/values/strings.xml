@@ -11,4 +11,6 @@
     <string name="menu_mvvm_data_binding">learning mvvm with data binding</string>
     <string name="menu_mvvm_rxjava">learning mvvm with rxjava</string>
     <string name="menu_mvpvm_rxjava">learning mvp-vm with rxjava</string>
+    <string name="menu_mvp_rx_java">learning mvp with rxjava</string>
+
 </resources>
