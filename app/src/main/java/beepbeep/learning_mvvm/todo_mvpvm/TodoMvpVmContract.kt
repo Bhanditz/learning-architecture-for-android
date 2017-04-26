@@ -9,6 +9,8 @@ interface TodoMvpVmContract {
         val toggleTodoAtIndexes: Observable<Int>
 
         val deleteTodoAtIndexes: Observable<Int>
+
+        val filterTodos: Observable<TodoMvpVmFilterType>
     }
 
     interface Output {
@@ -17,5 +19,7 @@ interface TodoMvpVmContract {
         val items: Observable<List<TodoMvpVmListViewModel>>
 
         val showEmptyViews: Observable<Boolean>
+
+        val filterTexts: Observable<String>
     }
 }

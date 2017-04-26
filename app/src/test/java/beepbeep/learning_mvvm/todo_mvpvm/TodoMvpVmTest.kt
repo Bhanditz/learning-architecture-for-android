@@ -24,15 +24,16 @@ class TodoMvpVmTest {
             override val addTodos: Observable<String> = Observable.empty()
             override val toggleTodoAtIndexes: Observable<Int> = Observable.empty()
             override val deleteTodoAtIndexes: Observable<Int> = Observable.empty()
+            override val filterTodos: Observable<TodoMvpVmFilterType> = Observable.empty()
         }
 
         val presenter = TodoMvpVmPresenter(view, repo)
 
-        presenter.items.subscribeWith(test)
+        presenter.viewModels.map { it.visibleItems }.subscribeWith(test)
 
-        val nexts = test.values()
-        val items = nexts.last()
-        assertThat(items, hasItem(TodoMvpVmListViewModel(true, "test1")))
+        val items = test.values()
+        val last = items.last()
+        assertThat(last, hasItem(TodoMvpVmListViewModel(true, "test1")))
     }
 
     @Test
@@ -50,11 +51,12 @@ class TodoMvpVmTest {
             override val addTodos: Observable<String> = addTodoSubject
             override val toggleTodoAtIndexes: Observable<Int> = Observable.empty()
             override val deleteTodoAtIndexes: Observable<Int> = Observable.empty()
+            override val filterTodos: Observable<TodoMvpVmFilterType> = Observable.empty()
         }
 
         val presenter = TodoMvpVmPresenter(view, repo)
 
-        presenter.items.subscribeWith(test)
+        presenter.viewModels.map { it.visibleItems }.subscribeWith(test)
 
         addTodoSubject.onNext("New TITLE")
 
@@ -80,6 +82,7 @@ class TodoMvpVmTest {
             override val addTodos: Observable<String> = addTodoSubject
             override val toggleTodoAtIndexes: Observable<Int> = Observable.empty()
             override val deleteTodoAtIndexes: Observable<Int> = Observable.empty()
+            override val filterTodos: Observable<TodoMvpVmFilterType> = Observable.empty()
         }
 
         val presenter = TodoMvpVmPresenter(view, repo)
@@ -111,11 +114,12 @@ class TodoMvpVmTest {
             override val addTodos: Observable<String> = Observable.empty()
             override val toggleTodoAtIndexes: Observable<Int> = toggleSubject
             override val deleteTodoAtIndexes: Observable<Int> = Observable.empty()
+            override val filterTodos: Observable<TodoMvpVmFilterType> = Observable.empty()
         }
 
         val presenter = TodoMvpVmPresenter(view, repo)
 
-        presenter.items.subscribeWith(test)
+        presenter.viewModels.map { it.visibleItems }.subscribeWith(test)
 
         val items = test.values()
 
@@ -151,11 +155,12 @@ class TodoMvpVmTest {
             override val addTodos: Observable<String> = Observable.empty()
             override val toggleTodoAtIndexes: Observable<Int> = Observable.empty()
             override val deleteTodoAtIndexes: Observable<Int> = deleteSubject
+            override val filterTodos: Observable<TodoMvpVmFilterType> = Observable.empty()
         }
 
         val presenter = TodoMvpVmPresenter(view, repo)
 
-        presenter.items.subscribeWith(test)
+        presenter.viewModels.map { it.visibleItems }.subscribeWith(test)
 
         val items = test.values()
 
@@ -168,5 +173,47 @@ class TodoMvpVmTest {
         val itemAfterDeleted2 = items[3]
         assertThat(itemAfterDeleted2, not(hasItem(TodoMvpVmListViewModel(true, "111"))))
         assertThat(itemAfterDeleted2.size, equalTo(0))
+    }
+
+    @Test
+    fun `when filter todo, user sees only todos that match with selected filter`() {
+        val test = TestObserver<List<TodoMvpVmListViewModel>>()
+
+        val repo = object : TodoMvpVmRepositoryType {
+            override fun loadInitialTodo(): Observable<List<TodoMvpVmListViewModel>> {
+                return Observable.just(listOf(
+                        TodoMvpVmListViewModel(true, "111"),
+                        TodoMvpVmListViewModel(false, "222"),
+                        TodoMvpVmListViewModel(false, "333"),
+                        TodoMvpVmListViewModel(false, "444"),
+                        TodoMvpVmListViewModel(true, "555")))
+            }
+        }
+
+        val filterSubject = PublishSubject.create<TodoMvpVmFilterType>()
+        val view = object : TodoMvpVmContract.Input {
+            override val addTodos: Observable<String> = Observable.empty()
+            override val toggleTodoAtIndexes: Observable<Int> = Observable.empty()
+            override val deleteTodoAtIndexes: Observable<Int> = Observable.empty()
+            override val filterTodos: Observable<TodoMvpVmFilterType> = filterSubject
+        }
+
+        val presenter = TodoMvpVmPresenter(view, repo)
+
+        presenter.viewModels.map { it.visibleItems }.subscribeWith(test)
+
+        val items = test.values()
+
+        filterSubject.onNext(TodoMvpVmFilterType.Active)
+        val itemsForActive = items[2]
+        assertThat(itemsForActive.size, equalTo(3))
+
+        filterSubject.onNext(TodoMvpVmFilterType.Completed)
+        val itemsForCompleted = items[3]
+        assertThat(itemsForCompleted.size, equalTo(2))
+
+        filterSubject.onNext(TodoMvpVmFilterType.All)
+        val itemsForAll = items[4]
+        assertThat(itemsForAll.size, equalTo(5))
     }
 }
