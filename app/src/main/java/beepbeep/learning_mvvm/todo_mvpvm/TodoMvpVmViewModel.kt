@@ -32,16 +32,20 @@ data class TodoMvpVmViewModel(val filter: TodoMvpVmFilterType = TodoMvpVmFilterT
             }
 
             is ToggleTodo -> {
+                val toggledItem = visibleItems[command.index]
                 val _items = items.toMutableList().apply {
-                    val selectedItem = this[command.index]
-                    this[command.index] = TodoMvpVmListViewModel(!selectedItem.completed, selectedItem.title)
+                    val originalIndex = indexOf(toggledItem)
+                    val originalItem = this[originalIndex]
+                    this[originalIndex] = TodoMvpVmListViewModel(!originalItem.completed, originalItem.title)
                 }
                 return TodoMvpVmViewModel(filter, _items, _items.filter { it.isVisibleWithFilter(filter) })
             }
 
             is DeleteTodo -> {
+                val deletedItem = visibleItems[command.index]
                 val _items = items.toMutableList().apply {
-                    removeAt(command.index)
+                    val originalIndex = indexOf(deletedItem)
+                    removeAt(originalIndex)
                 }
                 return TodoMvpVmViewModel(filter, _items, _items.filter { it.isVisibleWithFilter(filter) })
             }
