@@ -12,7 +12,7 @@ import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.list_item_todo.view.listTasksComplete
 import kotlinx.android.synthetic.main.list_item_todo.view.listTasksTitle
 
-typealias TodoActionOnIndexHandler = (Int) -> Unit
+typealias TodoActionOnIndexHandler = (View, Int) -> Unit
 
 class TodoMvpVmViewHolder(view: View,
                           val itemClickHandler: TodoActionOnIndexHandler,
@@ -20,10 +20,10 @@ class TodoMvpVmViewHolder(view: View,
                           val itemLongClickHandler: TodoActionOnIndexHandler) : RecyclerView.ViewHolder(view) {
     init {
         view.setOnClickListener {
-            itemClickHandler.invoke(adapterPosition)
+            itemClickHandler.invoke(it, adapterPosition)
         }
         view.setOnLongClickListener {
-            itemLongClickHandler.invoke(adapterPosition)
+            itemLongClickHandler.invoke(it, adapterPosition)
             true
         }
     }
